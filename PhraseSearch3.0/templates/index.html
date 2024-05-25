@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log Search</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Log Search</h1>
+      <form method="post" enctype="multipart/form-data">
+        <label for="search_phrase">Search Phrase:</label>
+        <input type="text" id="search_phrase" name="search_phrase" />
+        <br />
+        <label>Preset Options:</label>
+        <div id="preset_options">
+          <div class="checkbox-container">
+            <input
+              type="checkbox"
+              id="resets"
+              name="preset_options"
+              value="resets"
+            />
+            <label for="resets">Resets</label>
+          </div>
+          <div class="checkbox-container">
+            <input type="checkbox" id="USB" name="preset_options" value="USB" />
+            <label for="USB">USB</label>
+          </div>
+          <div class="checkbox-container">
+            <input
+              type="checkbox"
+              id="touch"
+              name="preset_options"
+              value="touch"
+            />
+            <label for="touch">Touch</label>
+          </div>
+          <div class="checkbox-container">
+            <input
+              type="checkbox"
+              id="critical_error"
+              name="preset_options"
+              value="critical error"
+            />
+            <label for="critical_error">Critical Error</label>
+          </div>
+        </div>
+        <br />
+        <label for="files">Upload Files:</label>
+        <input type="file" id="files" name="files" multiple />
+        <br />
+        <button type="submit">Search</button>
+      </form>
+
+      {% if results %}
+      <h2>Search Results:</h2>
+      <ul>
+        {% for result in results %}
+        <li>{{ result|safe }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+  </body>
+</html>
